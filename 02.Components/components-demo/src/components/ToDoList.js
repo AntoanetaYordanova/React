@@ -11,6 +11,14 @@ export default function TodoList() {
     let counter = counterState[0];
     const setCounter = counterState[1];
 
+    const nameState = React.useState('');
+    const [name, setName] = nameState;
+    
+    const changeName = (ev) => {
+      const newName = ev.target.value;
+      setName(newName);
+    }
+
     console.log(todos);
     console.log(setTodos);
 
@@ -21,9 +29,8 @@ export default function TodoList() {
     //     age : '23'
     // }
 
-    function add() {
-        setCounter(++counter)
-    }
+    const add = () => setCounter(++counter);
+    
 
   return (
     //<> without import
@@ -39,6 +46,9 @@ export default function TodoList() {
       <h3>Counter:</h3>
       <p>{counter}</p>
       <button onClick={add}>Modify</button>
+      <p>Name: {name}</p>
+      <input type="text" onChange={changeName}/>
+      {/* <button onChange={changeName}>Change</button> */}
     </React.Fragment>
     //</>
   );

@@ -1,10 +1,12 @@
-const Header = () => {
+const Header = ({ 
+    navChangeHandler 
+}) => {
     function headerClickHandler(ev) {
         ev.preventDefault();
 
-        if(ev.target.tagName === 'A') {
+        if (ev.target.tagName === 'A') {
             const url = new URL(ev.target.href);
-            console.log(url.pathname);
+            navChangeHandler(url.pathname);
         }
     }
 

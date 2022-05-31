@@ -5,6 +5,7 @@ const Header = ({
         ev.preventDefault();
 
         if (ev.target.tagName === 'A') {
+            console.log(ev.target);
             const url = new URL(ev.target.href);
             navChangeHandler(url.pathname);
         }

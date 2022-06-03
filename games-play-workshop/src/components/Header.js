@@ -1,32 +1,28 @@
-const Header = ({ 
-    navChangeHandler 
-}) => {
-    function headerClickHandler(ev) {
-        ev.preventDefault();
+import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-        if (ev.target.tagName === 'A') {
-            console.log(ev.target);
-            const url = new URL(ev.target.href);
-            navChangeHandler(url.pathname);
-        }
+const Header = () => {
+
+    const styles = {
+        color: 'red'
     }
 
     return (
-        <header onClick={headerClickHandler}>
+        <header>
             <h1>
-                <a className="home" href="/">
+                <Link className="home" to="/">
                     GamesPlay
-                </a>
+                </Link>
             </h1>
             <nav>
-                <a href="/catalog">All games</a>
+                <NavLink activeStyle={styles} to="/catalog">All games</NavLink>
                 <div id="user">
-                    <a href="/create">Create Game</a>
-                    <a href="/logout">Logout</a>
+                    <Link to="/create">Create Game</Link>
+                    <Link to="/logout">Logout</Link>
                 </div>
                 <div id="guest">
-                    <a href="/login">Login</a>
-                    <a href="/register">Register</a>
+                    <Link to="/login">Login</Link>
+                    <Link to="/register">Register</Link>
                 </div>
             </nav>
         </header>

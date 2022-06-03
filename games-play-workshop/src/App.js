@@ -1,5 +1,4 @@
 import './App.css';
-import { useState } from 'react'
 import Header from './components/Header';
 import WelcomeWorld from './components/WelcomeWorld';
 import Catalog from './components/Catalog';
@@ -8,29 +7,27 @@ import Login from './components/Login';
 import Register from './components/Register';
 import PageNotFound from './components/PageNotFound';
 import Details from './components/Details';
-
+import { Route, Redirect } from 'react-router-dom'
 
 function App() {
-  
-const navChangeHandler = (path) => {
-  changePath(path)
- }
-const [ path, changePath] = useState('/');
-
-const routes = {
-  '/' : <WelcomeWorld/>,
-  '/catalog' : <Catalog changePage = {navChangeHandler}/>,
-  '/create' : <Create/>,
-  '/login' : <Login/>,
-  '/register' : <Register/>,
-  '/details' : <Details/> 
-}
 
     return (
         <div id="box">
-            <Header navChangeHandler = {navChangeHandler}/>
+            <Header/>
             <main id="main-content">
-              { (routes[path]) || <PageNotFound/>}
+              <Route path={'/'} exact component={WelcomeWorld}/>
+              <Route path={'/catalog'} component={Catalog}/>
+              <Route path={'/create'} component={Create}/>
+              <Route path={'/login'} component={Login}/>
+              <Route path={'/register'} component={Register}/>
+              <Route path={'/details/:id'} component={Details}/>
+              <Route path={'/custom'}>
+                  <h1>Custom route</h1>
+              </Route>
+              <Route path={'/logout'} render={() => {
+                  console.log('Logged out');
+                  return <Redirect to="/"/>
+              }} />
             </main> 
         </div>
     );

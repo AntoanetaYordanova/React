@@ -1,7 +1,21 @@
+import { create } from "../../services/petsService";
+
 const Create = () => {
+    const createHandler = async (ev) => {
+        ev.preventDefault();
+        const formData = new FormData(ev.currentTarget);
+        const data = {
+            name : formData.get('name'),
+            description : formData.get('description'),
+            imageUrl : formData.get('imageUrl'),
+            type : formData.get('type'),
+        }
+        await create(data);
+    }
+
     return (
-        <section id="create-page" className="create">
-            <form id="create-form" action="" method="">
+        <section id="create-page"className="create">
+            <form id="create-form" onSubmit={createHandler}  method="post">
                 <fieldset>
                     <legend>Add new Pet</legend>
                     <p className="field">

@@ -1,43 +1,51 @@
+import { useParams } from 'react-router-dom';
+import { getById } from '../../services/petsService';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
 const Details = () => {
+    const { id } = useParams();
+
+    const [pet, setPet] = useState({});
+
+    useEffect(() => {
+        fetchPetData();
+    }, []);
+
+    async function fetchPetData() {
+        const data = await getById(id);
+        setPet(data);
+    }
+
     return (
         <section id="details-page" className="details">
             <div className="pet-information">
-                <h3>Name: Milo</h3>
-                <p className="type">Type: dog</p>
+                <h3>Name: {pet.name}</h3>
+                <p className="type">Type: {pet.type}</p>
                 <p className="img">
-                    <img src="/images/dog.png" />
+                    <img src={pet.imageUrl} />
                 </p>
                 <div className="actions">
-                    <a className="button" href="#">
+                    <Link className="button" to={`/edit/${pet._id}`}>
                         Edit
-                    </a>
-                    <a className="button" href="#">
+                    </Link>
+                    <Link className="button" to={`/delete/${pet._id}`}>
                         Delete
-                    </a>
+                    </Link>
 
-                    <a className="button" href="#">
+                    <Link className="button" to={`/delete/${pet._id}`}>
                         Like
-                    </a>
+                    </Link>
 
                     <div className="likes">
-                        <img className="hearts" src="/images/heart./png" />
+                        <img className="hearts" src="/images/heart.png" />
                         <span id="total-likes">Likes: 0</span>
                     </div>
                 </div>
             </div>
             <div className="pet-description">
                 <h3>Description:</h3>
-                <p>
-                    Today, some dogs are used as pets, others are used to help
-                    humans do their work. They are a popular pet because they
-                    are usually playful, friendly, loyal and listen to humans.
-                    Thirty million dogs in the United States are registered as
-                    pets.[5] Dogs eat both meat and vegetables, often mixed
-                    together and sold in stores as dog food. Dogs often have
-                    jobs, including as police dogs, army dogs, assistance dogs,
-                    fire dogs, messenger dogs, hunting dogs, herding dogs, or
-                    rescue dogs.
-                </p>
+                <p>{pet.description}</p>
             </div>
         </section>
     );

@@ -1,9 +1,10 @@
-import { useNavigate } from "react-router-dom"
+// import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const Logout = ({onLogout}) => {
-    console.log('Here');
+    // useNavigate('/');
     onLogout();
-    useNavigate('/');
+    return <Navigate to={'/'} replace={true}/>
 }
 
 export default Logout;

@@ -39,7 +39,8 @@ function App() {
         setUserInfo({
             isAthenticated : false,
             email : ''
-        })
+        });
+        
     }
 
     return (

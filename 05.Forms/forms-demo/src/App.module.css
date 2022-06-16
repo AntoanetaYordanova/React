@@ -1,0 +1,9 @@
+.app {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+form {
+    margin: auto;
+}

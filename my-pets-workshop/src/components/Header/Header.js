@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 
-export default function Header({ isAthenticated, email }) {
+export default function Header({email}) {
     const userNav = (
         <div id="user">
-            <span>Welcome, {email}</span>
+            <span>Welcome</span>
             <Link className="button" to="/my-pets">
                 My Pets
             </Link>
@@ -32,7 +32,7 @@ export default function Header({ isAthenticated, email }) {
             <nav className="navbar">
                 <section className="navbar-dashboard">
                     <Link to="/">Dashboard</Link>
-                    { isAthenticated ? userNav : guestNav }
+                    {email ? userNav : guestNav}
                 </section>
             </nav>
         </header>

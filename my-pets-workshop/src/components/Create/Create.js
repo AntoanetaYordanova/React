@@ -1,6 +1,12 @@
 import { create } from "../../services/petsService";
+import { useContext } from 'react';
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const Create = () => {
+    const navigate = useNavigate();
+    const { user } = useContext(AuthContext);
+
     const createHandler = async (ev) => {
         ev.preventDefault();
         const formData = new FormData(ev.currentTarget);
@@ -10,7 +16,8 @@ const Create = () => {
             imageUrl : formData.get('imageUrl'),
             type : formData.get('type'),
         }
-        await create(data);
+        await create(data, user.accessToken);
+        navigate('/');
     }
 
     return (

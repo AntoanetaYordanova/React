@@ -1,7 +1,23 @@
+import * as authService from '../../services/authService';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
+import { useContext } from 'react';
+
 const Register = () => {
+    const { login } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const registerHandler = async (e) => {
+        e.preventDefault();
+        const { email, password, repass } = Object.fromEntries(new FormData(e.currentTarget));
+        const userData = await authService.register(email, password);
+        login(userData);
+        navigate('/');
+    }
+
     return (
         <section id="register-page" className="register">
-            <form id="register-form" action="" method="">
+            <form method='post' id="register-form" onSubmit={registerHandler} >
                 <fieldset>
                     <legend>Register Form</legend>
                     <p className="field">
@@ -31,7 +47,7 @@ const Register = () => {
                         <span className="input">
                             <input
                                 type="password"
-                                name="confirm-pass"
+                                name="repass"
                                 id="repeat-pass"
                                 placeholder="Repeat Password"
                             />

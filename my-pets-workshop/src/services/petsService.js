@@ -1,27 +1,40 @@
-const baseUrl = 'http://localhost:3030'
+const baseUrl = 'http://localhost:3030/data'
 
 async function getAll() {
-    const res = await fetch(`${baseUrl}/data/pets`);
+    const res = await fetch(`${baseUrl}/pets`);
     return res.json();
 }
 
 async function getById(id) {
-    const res = await fetch(`${baseUrl}/data/pets/${id}`);
+    const res = await fetch(`${baseUrl}/pets/${id}`);
     return res.json();
 }
 
-async function create(data) {
-    await fetch(`${baseUrl}/data/pets`, {
+async function create(data, token) {
+    await fetch(`${baseUrl}/pets`, {
         method : 'post',
         headers : {
-            'x-authorization' : '8d3ffe1cd02b23f0a2f0d7d78f152551ac10b3e7914f4f188b41eede14e2ccfe'
+            'content-type' : 'application/json',
+            'X-Authorization' : token
         },
-        body : JSON.stringify(data)
+        body : JSON.stringify({...data, likes: 0})
     });
+}
+
+async function deletePet(id, token) {
+    await fetch(`${baseUrl}/pets/${id}`, {
+        method: 'delete',
+        headers: {
+            'X-Authorization' : token
+        }
+    });
+
+
 }
 
 export {
     getAll,
     create,
-    getById
+    getById,
+    deletePet
 }

@@ -12,7 +12,7 @@ function Login() {
     const loginHandler = (e) => {
         e.preventDefault();
         const {email, password} = Object.fromEntries(new FormData(e.currentTarget));
-        login(email);
+        login({email});
         navigate('/');
     }
 

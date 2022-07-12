@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import Header from './components/Header';
 import Login from './components/Login';
+import MyList from './components/MyList';
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
                 <div className='wrapper'>
                     <Routes>
                         <Route path="/login" element={<Login />} />
+                        <Route path="/my-list" element={<MyList />} />
                     </Routes>
                 </div>
             </div>

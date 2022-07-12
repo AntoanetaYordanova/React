@@ -5,8 +5,11 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 
 function NavScrollExample() {
+    const { user } = useAuth();
+
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
@@ -20,8 +23,9 @@ function NavScrollExample() {
           >
             <Nav.Link href="#action1">Home</Nav.Link>
             <Link to={'/login'} as={<Nav.Link/>}>Login</Link>
+            <Link to={'/my-list'} as={<Nav.Link/>}>My List</Link>
             <NavDropdown title="Link" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
+            <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action4">
                 Another action
               </NavDropdown.Item>
@@ -35,6 +39,7 @@ function NavScrollExample() {
             </Nav.Link>
           </Nav>
           <Form className="d-flex">
+            <p>Hello {user.email}</p>
             <Form.Control
               type="search"
               placeholder="Search"
